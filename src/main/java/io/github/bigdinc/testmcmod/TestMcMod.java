@@ -48,14 +48,25 @@ public class TestMcMod {
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "testmcmod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    // Creates a new Block with the id "testmcmod:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> RUBY_BLOCK =
+        BLOCKS.registerSimpleBlock(
+            "ruby_block",
+            BlockBehaviour.Properties.of()
+                 .mapColor(MapColor.COLOR_RED)
+                .strength(5.0f)
+                .requiresCorrectToolForDrops()
+    );
     // Creates a new BlockItem with the id "testmcmod:example_block", combining the namespace and path
-    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
+    public static final DeferredItem<BlockItem> RUBY_BLOCK_ITEM =
+        ITEMS.registerSimpleBlockItem(
+            "ruby_block",
+            RUBY_BLOCK
+        );
 
     // Creates a new food item with the id "testmcmod:example_id", nutrition 1 and saturation 2
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEat().nutrition(1).saturationMod(2f).build()));
+            .alwaysEat().nutrition(1).saturationMod(2f).build())
+    );
 
     // Creates a creative tab with the id "testmcmod:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
@@ -69,7 +80,7 @@ public class TestMcMod {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public TestMcMod(IEventBus modEventBus) {
-        // Register the commonSetup method for modloading
+        // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 
         // Register the Deferred Register to the mod event bus so blocks get registered
@@ -107,7 +118,7 @@ public class TestMcMod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(EXAMPLE_BLOCK_ITEM);
+            event.accept(RUBY_BLOCK_ITEM.get());
         }
     }
 
