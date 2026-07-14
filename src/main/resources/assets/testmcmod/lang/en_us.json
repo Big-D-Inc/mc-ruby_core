@@ -1,5 +1,8 @@
 {
   "itemGroup.testmcmod": "Example Mod Tab",
   "item.testmcmod.example_item": "Example Item",
-  "block.testmcmod.ruby_block": "Ruby Block"
+  "block.testmcmod.ruby_block": "Ruby Block",
+  "subtitles.testmcmod.block.ruby_block.break": "Ruby block breaks",
+  "subtitles.testmcmod.block.ruby_block.step": "Footsteps on ruby block",
+  "subtitles.testmcmod.block.ruby_block.place": "Ruby block placed"
 }

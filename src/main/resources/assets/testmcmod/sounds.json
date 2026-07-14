@@ -1,0 +1,22 @@
+{
+  "block.ruby_block.break": {
+    "subtitle": "subtitles.testmcmod.block.ruby_block.break",
+    "sounds": [
+      "testmcmod:ruby_block/break"
+    ]
+  },
+  "block.ruby_block.step": {
+    "subtitle": "subtitles.testmcmod.block.ruby_block.step",
+    "sounds": [
+      "testmcmod:ruby_block/step"
+    ]
+  },
+  "block.ruby_block.place": {
+    "subtitle": "subtitles.testmcmod.block.ruby_block.place",
+    "sounds": [
+      "testmcmod:ruby_block/place1",
+      "testmcmod:ruby_block/place2",
+      "testmcmod:ruby_block/place3"
+    ]
+  }
+}

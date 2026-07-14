@@ -1,9 +1,8 @@
 package io.github.bigdinc.testmcmod;
 
 import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -33,21 +32,41 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.level.block.SoundType;
+import net.neoforged.neoforge.common.util.DeferredSoundType;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TestMcMod.MODID)
 public class TestMcMod {
-    // Define mod id in a common place for everything to reference
-    public static final String MODID = "testmcmod";
-    // Directly reference a slf4j logger
-    public static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "testmcmod" namespace
+    public static final String MODID = "testmcmod"; //mod id for the registers
+    public static final Logger LOGGER = LogUtils.getLogger(); // Directly reference the logger
+
+    // default registers
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "testmcmod" namespace
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "testmcmod" namespace
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, MODID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
+    // creating our ruby block
+    public static final DeferredHolder<SoundEvent, SoundEvent> RUBY_BLOCK_BREAK = SOUND_EVENTS.register("block.ruby_block.break",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "block.ruby_block.break")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> RUBY_BLOCK_STEP = SOUND_EVENTS.register("block.ruby_block.step",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "block.ruby_block.step")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> RUBY_BLOCK_PLACE = SOUND_EVENTS.register("block.ruby_block.place",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "block.ruby_block.place")));
+
+    public static final SoundType RUBY_BLOCK_SOUNDS = new DeferredSoundType(
+            1.0F, // volume
+            1.0F, // pitch
+            RUBY_BLOCK_BREAK,
+            RUBY_BLOCK_STEP,
+            RUBY_BLOCK_PLACE,
+            RUBY_BLOCK_BREAK,
+            RUBY_BLOCK_STEP
+    );
     public static final DeferredBlock<Block> RUBY_BLOCK =
         BLOCKS.registerSimpleBlock(
             "ruby_block",
@@ -55,39 +74,37 @@ public class TestMcMod {
                  .mapColor(MapColor.COLOR_RED)
                 .strength(5.0f)
                 .requiresCorrectToolForDrops()
+                .sound(RUBY_BLOCK_SOUNDS)
     );
-    // Creates a new BlockItem with the id "testmcmod:example_block", combining the namespace and path
     public static final DeferredItem<BlockItem> RUBY_BLOCK_ITEM =
         ITEMS.registerSimpleBlockItem(
             "ruby_block",
             RUBY_BLOCK
-        );
+    );
 
     // Creates a new food item with the id "testmcmod:example_id", nutrition 1 and saturation 2
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
             .alwaysEat().nutrition(1).saturationMod(2f).build())
     );
 
-    // Creates a creative tab with the id "testmcmod:example_tab" for the example item, that is placed after the combat tab
+    // Creates a creative tab for our mod id
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.testmcmod")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                // items we are adding to out tab
+                output.accept(EXAMPLE_ITEM.get());
+                output.accept(RUBY_BLOCK_ITEM.get());
             }).build());
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
+
     public TestMcMod(IEventBus modEventBus) {
-        // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
+        SOUND_EVENTS.register(modEventBus);
         BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
@@ -103,7 +120,6 @@ public class TestMcMod {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 
         if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
@@ -125,7 +141,6 @@ public class TestMcMod {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
 
@@ -134,7 +149,6 @@ public class TestMcMod {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
