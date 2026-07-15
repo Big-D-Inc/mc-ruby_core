@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -81,22 +80,18 @@ public class TestMcMod {
             "ruby_block",
             RUBY_BLOCK
     );
-
-    // Creates a new food item with the id "testmcmod:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEat().nutrition(1).saturationMod(2f).build())
-    );
+    public static final DeferredItem<Item> RUBY = ITEMS.registerSimpleItem("ruby");
 
     // Creates a creative tab for our mod id
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.testmcmod")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                // items we are adding to out tab
-                output.accept(EXAMPLE_ITEM.get());
-                output.accept(RUBY_BLOCK_ITEM.get());
-            }).build());
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MOD_TAB = CREATIVE_MODE_TABS.register("testmcmod", () -> CreativeModeTab.builder()
+        .title(Component.translatable("itemGroup.testmcmod"))
+        .withTabsBefore(CreativeModeTabs.COMBAT)
+        .displayItems((parameters, output) -> {
+            // items we are adding to out tab
+            output.accept(RUBY.get());
+            output.accept(RUBY_BLOCK_ITEM.get());
+        }).build()
+    );
 
 
     public TestMcMod(IEventBus modEventBus) {
