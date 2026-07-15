@@ -1,6 +1,7 @@
 {
   "item.testmcmod.ruby": "Rubin",
   "block.testmcmod.ruby_block": "Blok Rubinu",
+  "block.testmcmod.ruby_ore": "Ruda Rubinu",
   "subtitles.testmcmod.block.ruby_block.break": "Blok rubinu pęka",
   "subtitles.testmcmod.block.ruby_block.step": "Kroki na bloku rubinu",
   "subtitles.testmcmod.block.ruby_block.place": "Blok rubinu zostaje postawiony"

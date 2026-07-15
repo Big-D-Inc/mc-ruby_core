@@ -2,6 +2,7 @@
   "itemGroup.testmcmod": "Test Mc Mod",
   "item.testmcmod.ruby": "Ruby",
   "block.testmcmod.ruby_block": "Ruby Block",
+  "block.testmcmod.ruby_ore": "Ruby Ore",
   "subtitles.testmcmod.block.ruby_block.break": "Ruby block breaks",
   "subtitles.testmcmod.block.ruby_block.step": "Footsteps on ruby block",
   "subtitles.testmcmod.block.ruby_block.place": "Ruby block placed"

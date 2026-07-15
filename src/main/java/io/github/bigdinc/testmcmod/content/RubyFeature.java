@@ -1,6 +1,7 @@
 package io.github.bigdinc.testmcmod.content;
 
 import io.github.bigdinc.testmcmod.TestMcMod;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.BlockItem;
@@ -15,10 +16,11 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class RubyFeature {
-    /****SOUNDS***
+    /***SOUNDS***
      1 - Ruby Block Sounds
-     *************/
+     ************/
     
+    //region 1 - Ruby Block Sounds ...
     public static final DeferredHolder<SoundEvent, SoundEvent> RUBY_BLOCK_BREAK =
         TestMcMod.SOUND_EVENTS.register(
         "block.ruby_block.break",
@@ -43,11 +45,14 @@ public class RubyFeature {
         RUBY_BLOCK_BREAK,
         RUBY_BLOCK_STEP
     );
+    //endregion
     
-    /****BLOCKS***
+    /***BLOCKS***
      1 - Ruby Block
-     *************/
+     2 - Ruby Ore
+     ***********/
     
+    //region 1 - Ruby block ...
     public static final DeferredBlock<Block> RUBY_BLOCK =
         TestMcMod.BLOCKS.registerSimpleBlock(
         "ruby_block",
@@ -57,29 +62,46 @@ public class RubyFeature {
             .requiresCorrectToolForDrops()
             .sound(RUBY_BLOCK_SOUNDS)
     );
-
-    /****ITEMS***
+    //endregion
+    
+    //region 2 - Ruby Ore Block ...
+    public static final DeferredBlock<Block> RUBY_ORE = TestMcMod.BLOCKS.registerSimpleBlock(
+        "ruby_ore",
+        BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_RED)
+            .strength(3.0f, 3.0f)
+            .requiresCorrectToolForDrops()
+            .sound(SoundType.STONE)
+    );
+    //endregion
+    
+    /***ITEMS***
      1 - Ruby Block Item
      2 - Ruby Item
-    *************/
+     3 - Ruby Ore Block Item
+    ***********/
 
     public static final DeferredItem<BlockItem> RUBY_BLOCK_ITEM =
         TestMcMod.ITEMS.registerSimpleBlockItem(
         "ruby_block",
-        RUBY_BLOCK
-    );
+            RUBY_BLOCK
+        );
 
     public static final DeferredItem<Item> RUBY =
         TestMcMod.ITEMS.register(
             "ruby",
-            ()  -> new Item(
-                new Item.Properties()
-            )
-    );
+            () -> new Item(new Item.Properties())
+        );
     
-    /****FUNCTIONS***
+    public static final DeferredItem<BlockItem> RUBY_ORE_ITEM =
+        TestMcMod.ITEMS.registerSimpleBlockItem(
+        "ruby_ore",
+            RUBY_ORE
+        );
+    
+    /***METHODS***
      1 - load
-     *************/
+     ************/
     
     public static void load() {
         TestMcMod.LOGGER.info(">> Loaded ruby feature");
