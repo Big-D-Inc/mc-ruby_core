@@ -5,7 +5,7 @@
     "minecraft:stony_peaks"
   ],
   "features": [
-    "testmcmod:ruby_ore_placed"
+    "testmcmod:ruby_ore"
   ],
   "step": "underground_ores"
 }

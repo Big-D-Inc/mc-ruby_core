@@ -4,9 +4,11 @@ import io.github.bigdinc.testmcmod.TestMcMod;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -64,15 +66,17 @@ public class RubyFeature {
     );
     //endregion
     
-    //region 2 - Ruby Ore Block ...
-    public static final DeferredBlock<Block> RUBY_ORE = TestMcMod.BLOCKS.registerSimpleBlock(
-        "ruby_ore",
-        BlockBehaviour.Properties.of()
-            .mapColor(MapColor.COLOR_RED)
-            .strength(3.0f, 3.0f)
-            .requiresCorrectToolForDrops()
-            .sound(SoundType.STONE)
+        //region 2 - Ruby Ore Block ...
+    public static final DeferredBlock<DropExperienceBlock> RUBY_ORE = TestMcMod.BLOCKS.register("ruby_ore",
+        () -> new DropExperienceBlock(
+            UniformInt.of(3, 7), // zakres XP: min 3, max 7
+            BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_RED)
+                .strength(3.0f, 3.0f)
+                .requiresCorrectToolForDrops()
+                .sound(SoundType.STONE))
     );
+    
     //endregion
     
     /***ITEMS***
