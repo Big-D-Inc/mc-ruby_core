@@ -42,11 +42,11 @@ displayName="${mod_name}" #mandatory
 #credits="" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-authors="Denis Pylypenko; Jakub Jastrzębski;"
+authors="denis1836;"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Testing and learning how Minecraft modding works.
+Adds rubies and a lot more to it!
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

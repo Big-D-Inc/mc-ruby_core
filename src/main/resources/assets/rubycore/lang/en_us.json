@@ -1,0 +1,17 @@
+{
+  "itemGroup.rubycore": "Test Mc Mod",
+  "item.rubycore.ruby": "Ruby",
+
+  "item.rubycore.ruby_sword": "Ruby Sword",
+  "item.rubycore.ruby_pickaxe": "Ruby Pickaxe",
+  "item.rubycore.ruby_axe": "Ruby Axe",
+  "item.rubycore.ruby_shovel": "Ruby Shovel",
+  "item.rubycore.ruby_hoe": "Ruby Hoe",
+
+  "block.rubycore.ruby_block": "Ruby Block",
+  "block.rubycore.ruby_ore": "Ruby Ore",
+
+  "subtitles.rubycore.block.ruby_block.break": "Ruby block breaks",
+  "subtitles.rubycore.block.ruby_block.step": "Footsteps on ruby block",
+  "subtitles.rubycore.block.ruby_block.place": "Ruby block placed"
+}

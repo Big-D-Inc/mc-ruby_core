@@ -1,0 +1,22 @@
+{
+  "block.ruby_block.break": {
+    "subtitle": "subtitles.rubycore.block.ruby_block.break",
+    "sounds": [
+      "rubycore:ruby_block/break"
+    ]
+  },
+  "block.ruby_block.step": {
+    "subtitle": "subtitles.rubycore.block.ruby_block.step",
+    "sounds": [
+      "rubycore:ruby_block/step"
+    ]
+  },
+  "block.ruby_block.place": {
+    "subtitle": "subtitles.rubycore.block.ruby_block.place",
+    "sounds": [
+      "rubycore:ruby_block/place1",
+      "rubycore:ruby_block/place2",
+      "rubycore:ruby_block/place3"
+    ]
+  }
+}

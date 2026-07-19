@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "testmcmod:ruby_ore",
-    "testmcmod:ruby_block"
+    "rubycore:ruby_ore",
+    "rubycore:ruby_block"
   ]
 }

@@ -10,13 +10,19 @@ build/**
 !**/src/**/build/
 
 ### IntelliJ IDEA ###
-.idea/
+.idea/*
+!.idea/icon.svg
+!.idea/dictionaries/
+.idea/dictionaries/*
+!.idea/dictionaries/project.xml
 *.iws
 *.iml
 *.ipr
 out/
 !**/src/**/out/
 
+
+### Minecraft Client ###
 .run/
 
 ### Eclipse ###

@@ -1,0 +1,16 @@
+{
+  "item.rubycore.ruby": "Rubin",
+
+  "item.rubycore.ruby_sword": "Rubinowy miecz",
+  "item.rubycore.ruby_pickaxe": "Rubinowy kilof",
+  "item.rubycore.ruby_axe": "Rubinowy topór",
+  "item.rubycore.ruby_shovel": "Rubinowa łopata",
+  "item.rubycore.ruby_hoe": "Rubinowa motyka",
+
+  "block.rubycore.ruby_block": "Blok Rubinu",
+  "block.rubycore.ruby_ore": "Ruda Rubinu",
+
+  "subtitles.rubycore.block.ruby_block.break": "Blok rubinu pęka",
+  "subtitles.rubycore.block.ruby_block.step": "Kroki na bloku rubinu",
+  "subtitles.rubycore.block.ruby_block.place": "Blok rubinu zostaje postawiony"
+}
