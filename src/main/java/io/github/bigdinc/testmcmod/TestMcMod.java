@@ -50,11 +50,17 @@ public class TestMcMod {
                 .title(Component.translatable("itemGroup.testmcmod.test_tab"))
                 .icon(() -> RubyFeature.RUBY.get().getDefaultInstance())
                 .displayItems((params, output) -> {
+                    //blocks
                     output.accept(RubyFeature.RUBY.get());
                     output.accept(RubyFeature.RUBY_BLOCK.get());
                     output.accept(RubyFeature.RUBY_ORE.get());
-                })
-                .build()
+                    //tools
+                    output.accept(RubyFeature.RUBY_SWORD.get());
+                    output.accept(RubyFeature.RUBY_PICKAXE.get());
+                    output.accept(RubyFeature.RUBY_AXE.get());
+                    output.accept(RubyFeature.RUBY_SHOVEL.get());
+                    output.accept(RubyFeature.RUBY_HOE.get());
+                }).build()
         );
 
     public TestMcMod(IEventBus modEventBus) {

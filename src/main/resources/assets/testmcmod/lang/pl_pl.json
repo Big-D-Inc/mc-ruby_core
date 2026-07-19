@@ -1,7 +1,15 @@
 {
   "item.testmcmod.ruby": "Rubin",
+
+  "item.testmcmod.ruby_sword": "Rubinowy miecz",
+  "item.testmcmod.ruby_pickaxe": "Rubinowy kilof",
+  "item.testmcmod.ruby_axe": "Rubinowy topór",
+  "item.testmcmod.ruby_shovel": "Rubinowa łopata",
+  "item.testmcmod.ruby_hoe": "Rubinowa motyka",
+
   "block.testmcmod.ruby_block": "Blok Rubinu",
   "block.testmcmod.ruby_ore": "Ruda Rubinu",
+
   "subtitles.testmcmod.block.ruby_block.break": "Blok rubinu pęka",
   "subtitles.testmcmod.block.ruby_block.step": "Kroki na bloku rubinu",
   "subtitles.testmcmod.block.ruby_block.place": "Blok rubinu zostaje postawiony"

@@ -2,35 +2,35 @@ package io.github.bigdinc.testmcmod.content;
 
 import io.github.bigdinc.testmcmod.TestMcMod;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.TierSortingRegistry;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.HoeItem;
 
 import java.util.List;
-
-import static net.minecraft.tags.BlockTags.*;
 
 public class RubyFeature {
     /***SOUNDS***
@@ -99,14 +99,16 @@ public class RubyFeature {
      **********/
 
     //region 1 - Ruby Tool Tier ...
+    public static final TagKey<Block> NEEDS_RUBY_TOOL =
+        TagKey.create(Registries.BLOCK, new ResourceLocation(TestMcMod.MODID, "needs_ruby_tool"));
     public static final Tier RUBY_TIER = new SimpleTier(
         3,
         800,
         7.0f,
         2.5f,
         12,
-        BlockTags.INCORRECT_FOR_IRON_TOOL,
-        () -> Ingredient.of(RUBY.get())
+        NEEDS_RUBY_TOOL,
+        () -> Ingredient.of(RubyFeature.RUBY.get())
     );
     
     static {
@@ -128,9 +130,9 @@ public class RubyFeature {
 
     public static final DeferredItem<BlockItem> RUBY_BLOCK_ITEM =
         TestMcMod.ITEMS.registerSimpleBlockItem(
-        "ruby_block",
+            "ruby_block",
             RUBY_BLOCK
-    );
+        );
 
     public static final DeferredItem<Item> RUBY =
         TestMcMod.ITEMS.register(
