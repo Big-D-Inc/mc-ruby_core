@@ -1,5 +1,6 @@
 {
-  "itemGroup.rubycore": "Test Mc Mod",
+  "itemGroup.rubycore": "Ruby Core",
+  "itemGroup.rubycore.rubycore": "Ruby Core",
 
   "item.rubycore.ruby": "Ruby",
 

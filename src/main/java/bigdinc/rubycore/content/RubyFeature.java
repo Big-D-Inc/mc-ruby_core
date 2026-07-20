@@ -178,7 +178,7 @@ public class RubyFeature {
     //region 1 - Ruby Armor Material ...
     public enum RubyArmorMaterial implements ArmorMaterial {
         RUBY(
-            "ruby",
+            "ruby_armor",
             37,
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.BOOTS, 3);
