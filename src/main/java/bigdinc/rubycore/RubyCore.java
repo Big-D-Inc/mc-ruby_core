@@ -35,8 +35,9 @@ public class RubyCore {
                 .title(Component.translatable("itemGroup.rubycore.rubycore"))
                 .icon(() -> RubyFeature.RUBY.get().getDefaultInstance())
                 .displayItems((params, output) -> {
-                    //blocks
+                    //items
                     output.accept(RubyFeature.RUBY.get());
+                    //blocks
                     output.accept(RubyFeature.RUBY_BLOCK.get());
                     output.accept(RubyFeature.RUBY_ORE.get());
                     //tools
@@ -45,6 +46,8 @@ public class RubyCore {
                     output.accept(RubyFeature.RUBY_AXE.get());
                     output.accept(RubyFeature.RUBY_SHOVEL.get());
                     output.accept(RubyFeature.RUBY_HOE.get());
+                    //armor
+                    output.accept(RubyFeature.RUBY_HELMET.get());
                 }).build()
         );
 
@@ -62,5 +65,6 @@ public class RubyCore {
     
     private void registerFeatures() {
         RubyFeature.load();
+        LOGGER.info(">> [" + RubyCore.MODID + "]: Loaded Ruby Core Ruby Feature successfully");
     }
 }

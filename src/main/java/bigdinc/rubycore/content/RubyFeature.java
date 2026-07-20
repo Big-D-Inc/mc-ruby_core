@@ -2,20 +2,18 @@ package bigdinc.rubycore.content;
 
 import bigdinc.rubycore.RubyCore;
 
+import java.util.List;
+import java.util.EnumMap;
+import java.util.function.Supplier;
+
+import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DropExperienceBlock;
@@ -29,8 +27,7 @@ import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
-
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class RubyFeature {
     /***SOUNDS***
@@ -122,22 +119,22 @@ public class RubyFeature {
     //endregion
     
     /***ITEMS***
-     1 - Ruby Block Item
-     2 - Ruby Item
-     3 - Ruby Ore Block Item
-     4 - Ruby Tools
+     1 - Ruby Item
+     2 - Blocks Items
+     3 - Ruby Tools
     ***********/
-
-    public static final DeferredItem<BlockItem> RUBY_BLOCK_ITEM =
-        RubyCore.ITEMS.registerSimpleBlockItem(
-            "ruby_block",
-            RUBY_BLOCK
-        );
-
+    
     public static final DeferredItem<Item> RUBY =
         RubyCore.ITEMS.register(
             "ruby",
             () -> new Item(new Item.Properties())
+    );
+    
+    //region 2 - Block Items ...
+    public static final DeferredItem<BlockItem> RUBY_BLOCK_ITEM =
+        RubyCore.ITEMS.registerSimpleBlockItem(
+            "ruby_block",
+            RUBY_BLOCK
     );
     
     public static final DeferredItem<BlockItem> RUBY_ORE_ITEM =
@@ -145,8 +142,9 @@ public class RubyFeature {
         "ruby_ore",
             RUBY_ORE
     );
+    //endregion
     
-    //region 4 - Ruby tools ...
+    //region 3 - Ruby tools ...
     public static final DeferredItem<SwordItem> RUBY_SWORD =
         RubyCore.ITEMS.register("ruby_sword",
             () -> new SwordItem(RUBY_TIER, 3, -2.4f, new Item.Properties())
@@ -173,11 +171,97 @@ public class RubyFeature {
     );
     //endregion
     
+    /***ARMOR***
+     1 - Ruby Armor Material
+     **********/
+
+    //region 1 - Ruby Armor Material ...
+    public enum RubyArmorMaterial implements ArmorMaterial {
+        RUBY(
+            "ruby",
+            37,
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 3);
+                map.put(ArmorItem.Type.LEGGINGS, 6);
+                map.put(ArmorItem.Type.CHESTPLATE, 8);
+                map.put(ArmorItem.Type.HELMET, 3);
+            }),
+            12,
+            SoundEvents.ARMOR_EQUIP_DIAMOND,
+            2.5f,
+            0.0f,
+            () -> Ingredient.of(RubyFeature.RUBY.get())
+        );
+        
+        private static final EnumMap<ArmorItem.Type, Integer> BASE_DURABILITY =
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 13);
+                map.put(ArmorItem.Type.LEGGINGS, 15);
+                map.put(ArmorItem.Type.CHESTPLATE, 16);
+                map.put(ArmorItem.Type.HELMET, 11);
+            }
+        );
+        
+        private final String name;
+        private final int durabilityMultiplier;
+        private final EnumMap<ArmorItem.Type, Integer> defenseValues;
+        private final int enchantmentValue;
+        private final SoundEvent equipSound;
+        private final float toughness;
+        private final float knockbackResistance;
+        private final Supplier<Ingredient> repairIngredient;
+        
+        RubyArmorMaterial
+        (String name, int durabilityMultiplier, EnumMap<ArmorItem.Type, Integer> defenseValues,
+        int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance,
+        Supplier<Ingredient> repairIngredient) {
+            this.name = name;
+            this.durabilityMultiplier = durabilityMultiplier;
+            this.defenseValues = defenseValues;
+            this.enchantmentValue = enchantmentValue;
+            this.equipSound = equipSound;
+            this.toughness = toughness;
+            this.knockbackResistance = knockbackResistance;
+            this.repairIngredient = repairIngredient;
+        }
+        
+        @Override public String getName() {
+            return RubyCore.MODID + ":" + name;
+        }
+        @Override public int getDurabilityForType(ArmorItem.Type type) {
+            return BASE_DURABILITY.get(type) * durabilityMultiplier;
+        }
+        @Override public int getDefenseForType(ArmorItem.Type type) {
+            return defenseValues.get(type);
+        }
+        @Override public int getEnchantmentValue() {
+            return enchantmentValue;
+        }
+        @Override public SoundEvent getEquipSound() {
+            return equipSound;
+        }
+        @Override public Ingredient getRepairIngredient() {
+            return repairIngredient.get();
+        }
+        @Override public float getToughness() {
+            return toughness;
+        }
+        @Override public float getKnockbackResistance() {
+            return knockbackResistance;
+        }
+    }
+    //endregion
+    
+    public static final DeferredItem<ArmorItem> RUBY_HELMET =
+        RubyCore.ITEMS.register("ruby_helmet",
+            () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.HELMET, new Item.Properties())
+    );
+    
     /***METHODS***
      1 - load
      ************/
     
     public static void load() {
-        RubyCore.LOGGER.info(">> Loaded ruby feature");
+        RubyCore.LOGGER.info(">> [" + RubyCore.MODID + "]: Loading Ruby Core");
     }
 }

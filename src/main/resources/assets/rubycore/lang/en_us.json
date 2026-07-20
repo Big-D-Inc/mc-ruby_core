@@ -1,6 +1,9 @@
 {
   "itemGroup.rubycore": "Test Mc Mod",
+
   "item.rubycore.ruby": "Ruby",
+
+  "item.rubycore.ruby_helmet": "Ruby Helmet",
 
   "item.rubycore.ruby_sword": "Ruby Sword",
   "item.rubycore.ruby_pickaxe": "Ruby Pickaxe",
