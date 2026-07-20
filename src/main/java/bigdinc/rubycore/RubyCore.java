@@ -48,6 +48,9 @@ public class RubyCore {
                     output.accept(RubyFeature.RUBY_HOE.get());
                     //armor
                     output.accept(RubyFeature.RUBY_HELMET.get());
+                    output.accept(RubyFeature.RUBY_CHESTPLATE.get());
+                    output.accept(RubyFeature.RUBY_LEGGINGS.get());
+                    output.accept(RubyFeature.RUBY_BOOTS.get());
                 }).build()
         );
 

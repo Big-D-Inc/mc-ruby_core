@@ -252,9 +252,21 @@ public class RubyFeature {
     }
     //endregion
     
-    public static final DeferredItem<ArmorItem> RUBY_HELMET =
-        RubyCore.ITEMS.register("ruby_helmet",
-            () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.HELMET, new Item.Properties())
+    public static final DeferredItem<ArmorItem> RUBY_HELMET = RubyCore.ITEMS.register(
+        "ruby_helmet",
+        () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.HELMET, new Item.Properties())
+    );
+    public static final DeferredItem<ArmorItem> RUBY_CHESTPLATE = RubyCore.ITEMS.register(
+        "ruby_chestplate",
+        () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.CHESTPLATE, new Item.Properties() )
+    );
+    public static final DeferredItem<ArmorItem> RUBY_LEGGINGS = RubyCore.ITEMS.register(
+        "ruby_leggings",
+        () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.LEGGINGS, new Item.Properties())
+    );
+    public static final DeferredItem<ArmorItem> RUBY_BOOTS = RubyCore.ITEMS.register(
+        "ruby_boots",
+        () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.BOOTS, new Item.Properties())
     );
     
     /***METHODS***
