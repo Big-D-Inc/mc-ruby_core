@@ -1,7 +1,11 @@
 {
   "item.rubycore.ruby": "Rubin",
 
-  "item.rubycore.ruby_helmet": "Rubinowy Hełm",
+  "item.rubycore.ruby_helmet": "Rubinowy hełm",
+  "item.rubycore.ruby_chestplate": "Rubinowy napierśnik",
+  "item.rubycore.ruby_leggings": "Rubinowe spodnie",
+  "item.rubycore.ruby_boots": "Rubinowe buty",
+  "item.rubycore.ruby_horse_armor": "Rubinowy pancerz konny",
 
   "item.rubycore.ruby_sword": "Rubinowy miecz",
   "item.rubycore.ruby_pickaxe": "Rubinowy kilof",

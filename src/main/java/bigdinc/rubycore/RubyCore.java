@@ -51,6 +51,7 @@ public class RubyCore {
                     output.accept(RubyFeature.RUBY_CHESTPLATE.get());
                     output.accept(RubyFeature.RUBY_LEGGINGS.get());
                     output.accept(RubyFeature.RUBY_BOOTS.get());
+                    output.accept(RubyFeature.RUBY_HORSE_ARMOR.get());
                 }).build()
         );
 

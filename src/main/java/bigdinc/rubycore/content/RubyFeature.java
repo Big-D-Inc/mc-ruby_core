@@ -27,7 +27,6 @@ import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
-import org.jetbrains.annotations.NotNull;
 
 public class RubyFeature {
     /***SOUNDS***
@@ -173,6 +172,8 @@ public class RubyFeature {
     
     /***ARMOR***
      1 - Ruby Armor Material
+     2 - Ruby Armor
+     3 - Ruby Horse Armor
      **********/
 
     //region 1 - Ruby Armor Material ...
@@ -252,6 +253,7 @@ public class RubyFeature {
     }
     //endregion
     
+    //region 2 - Ruby Armor ...
     public static final DeferredItem<ArmorItem> RUBY_HELMET = RubyCore.ITEMS.register(
         "ruby_helmet",
         () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.HELMET, new Item.Properties())
@@ -268,6 +270,18 @@ public class RubyFeature {
         "ruby_boots",
         () -> new ArmorItem(RubyArmorMaterial.RUBY, ArmorItem.Type.BOOTS, new Item.Properties())
     );
+    //endregion
+    
+    //region 3 - Ruby Horse Armor
+    public static final DeferredItem<HorseArmorItem> RUBY_HORSE_ARMOR =
+        RubyCore.ITEMS.register("ruby_horse_armor",
+            () -> new HorseArmorItem(
+                9,
+                new ResourceLocation(RubyCore.MODID, "textures/entity/horse/armor/ruby_horse_armor.png"),
+                new Item.Properties().stacksTo(1)
+            )
+        );
+    //endregion
     
     /***METHODS***
      1 - load
